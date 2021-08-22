@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "field_label": "K tapaile mall rakhnu bhayo?",
+    "field_type": "yes_no",
+    "parentID": null,
+    "controlFlow": null
+  },
+  {
+    "id": 2,
+    "field_label": "Mall kahile charnu bho?",
+    "field_type": "text",
+    "parentID": 1,
+    "controlFlow": "Yes"
+  },
+  {
+    "id": 3,
+    "field_label": "Mall ramro cha?",
+    "field_type": "yes_no",
+    "parentID": 1,
+    "controlFlow": "Yes"
+  },
+  {
+    "id": 4,
+    "field_label": "Mall kinnu bhayo ta?",
+    "field_type": "yes_no",
+    "parentID": 1,
+    "controlFlow": "No"
+  },
+  {
+    "id": 5,
+    "field_label": "Kun mall kinnu bho?",
+    "field_type": "text",
+    "parentID": 4,
+    "controlFlow": "Yes"
+  },
+  {
+    "id": 6,
+    "field_label": "Kei bhannu cha ta?",
+    "field_type": "text",
+    "parentID": 4,
+    "controlFlow": "No"
+  },
+  {
+    "id": 7,
+    "field_label": "1-10 Kati +ve rating dinu huncha?",
+    "field_type": "text",
+    "parentID": 3,
+    "controlFlow": "Yes"
+  },
+  {
+    "id": 8,
+    "field_label": "1-10 Kati -ve rating dinu huncha?",
+    "field_type": "text",
+    "parentID": 3,
+    "controlFlow": "No"
+  }
+]
