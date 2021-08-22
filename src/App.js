@@ -23,6 +23,28 @@ function App() {
     event.preventDefault();
   };
 
+  const fetchIDsToRemove = (uid) => {
+    let result = [];
+    //Reset all child elements
+    const found_root = formFields.find((f) => f.id === uid);
+
+    // Fetch items where root id is in parentID i.e. Find all the childs
+    const child_elements = formFields.filter(
+      (f) => f.parentID === found_root.id
+    );
+
+    if (child_elements.length) {
+      for (let item of child_elements) {
+        const found = formFields.find((f) => f.parentID === item.id);
+        //If child is in render fields list, Remove
+        if (found) {
+          result.push(found.id);
+        }
+      }
+    }
+    return result;
+  };
+
   const fetchAndMergeFields = ({ flow, uid, parentID }) => {
     let to_be_removed = [];
     // If selected field has no parent i.e. is a root.
@@ -46,17 +68,20 @@ function App() {
       }
     }
 
-    console.log('TBR==>', to_be_removed);
-
     const fetchedFields = sampleJSON.filter(
       (f) => f.parentID === uid && f.controlFlow === flow
     );
 
     // Remove if parentID matches with clicked itme id
     const sanitized_data = formFields.filter((f) => f.parentID !== uid);
-    console.log('Sanitized==>', sanitized_data);
+    let merged_fields = [...sanitized_data, ...fetchedFields];
 
-    const merged_fields = [...sanitized_data, ...fetchedFields];
+    if (to_be_removed.length) {
+      for (let id of to_be_removed) {
+        merged_fields = merged_fields.filter((f) => f.id !== id);
+      }
+    }
+    // Finally set to state
     setFormFields(merged_fields);
   };
 
