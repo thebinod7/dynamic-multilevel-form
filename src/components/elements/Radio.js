@@ -15,6 +15,7 @@ const Radio = ({
       <p>{field_label}</p>
       <label class="radio-inline">
         <input
+          style={{ margin: 5 }}
           onChange={(event) =>
             handleChange(field_id, event, { flow: 'Yes', uid: id, parentID })
           }
@@ -25,6 +26,7 @@ const Radio = ({
       </label>
       <label class="radio-inline">
         <input
+          style={{ margin: 5 }}
           onChange={(event) =>
             handleChange(field_id, event, { flow: 'No', uid: id, parentID })
           }

@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Element from './components/Element';
 import { FormContext } from './FormContext';
 
+// Only root level questions
 const filteredSample = sampleJSON.filter((f) => f.parentID === null);
 
 function App() {
@@ -22,21 +23,46 @@ function App() {
     event.preventDefault();
   };
 
-  const fetchAndMergeFields = (flow, uid) => {
-    console.log({ uid });
+  const fetchAndMergeFields = ({ flow, uid, parentID }) => {
+    let to_be_removed = [];
+    // If selected field has no parent i.e. is a root.
+    if (!parentID) {
+      //Reset all child elements
+      const found_root = formFields.find((f) => f.id === uid);
+
+      // Fetch items where root id is in parentID i.e. Find all the childs
+      const child_elements = formFields.filter(
+        (f) => f.parentID === found_root.id
+      );
+
+      if (child_elements.length) {
+        for (let item of child_elements) {
+          const found = formFields.find((f) => f.parentID === item.id);
+          //If child is in render fields list, Remove
+          if (found) {
+            to_be_removed.push(found.id);
+          }
+        }
+      }
+    }
+
+    console.log('TBR==>', to_be_removed);
+
     const fetchedFields = sampleJSON.filter(
       (f) => f.parentID === uid && f.controlFlow === flow
     );
 
+    // Remove if parentID matches with clicked itme id
     const sanitized_data = formFields.filter((f) => f.parentID !== uid);
+    console.log('Sanitized==>', sanitized_data);
 
     const merged_fields = [...sanitized_data, ...fetchedFields];
     setFormFields(merged_fields);
   };
 
   const handleChange = (id, event, options) => {
-    const { flow, uid } = options;
-    fetchAndMergeFields(flow, uid);
+    const { flow, uid, parentID } = options;
+    fetchAndMergeFields({ flow, uid, parentID });
 
     const newElements = { ...elements };
     newElements.fields.forEach((field) => {
@@ -61,7 +87,7 @@ function App() {
   return (
     <FormContext.Provider value={{ handleChange }}>
       <div className="App container">
-        <h3>{page_label}</h3>
+        <h3 style={{ padding: 15 }}>{page_label}</h3>
         <form style={{ display: 'none' }}>
           {fields
             ? fields.map((field, i) => <Element key={i} field={field} />)
@@ -76,7 +102,7 @@ function App() {
         </form>
 
         {/* ===SAMPLE QUESTIONS=== */}
-        <div id="sample-questions">
+        <div id="sample-questions" style={{ padding: 30 }}>
           {formFields.map((field, i) => (
             <Element key={i + 20} field={field} />
           ))}

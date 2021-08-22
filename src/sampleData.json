@@ -36,21 +36,21 @@
   },
   {
     "id": 6,
-    "field_label": "Kei bhannu cha ta?",
+    "field_label": "Kina kinnu bhayena?",
     "field_type": "text",
     "parentID": 4,
     "controlFlow": "No"
   },
   {
     "id": 7,
-    "field_label": "1-10 Kati +ve rating dinu huncha?",
+    "field_label": "(1-5) Kati +ve rating dinu huncha?",
     "field_type": "text",
     "parentID": 3,
     "controlFlow": "Yes"
   },
   {
     "id": 8,
-    "field_label": "1-10 Kati -ve rating dinu huncha?",
+    "field_label": "(1-5) Kati -ve rating dinu huncha?",
     "field_type": "text",
     "parentID": 3,
     "controlFlow": "No"
