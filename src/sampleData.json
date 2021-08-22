@@ -1,14 +1,14 @@
 [
   {
     "id": 1,
-    "field_label": "K tapaile mall rakhnu bhayo?",
+    "field_label": "K tapaile mall chharnu bhayo?",
     "field_type": "yes_no",
-    "parentID": null,
+    "parentID": "root",
     "controlFlow": null
   },
   {
     "id": 2,
-    "field_label": "Mall kahile charnu bho?",
+    "field_label": "Mall kahile chharnu bho?",
     "field_type": "text",
     "parentID": 1,
     "controlFlow": "Yes"

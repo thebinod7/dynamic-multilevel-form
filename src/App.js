@@ -6,7 +6,7 @@ import Element from './components/Element';
 import { FormContext } from './FormContext';
 
 // Only root level questions
-const filteredSample = sampleJSON.filter((f) => f.parentID === null);
+const filteredSample = sampleJSON.filter((f) => f.parentID === 'root');
 
 function App() {
   const [elements, setElements] = useState(null);
@@ -23,6 +23,7 @@ function App() {
     event.preventDefault();
   };
 
+  // UID == Clicked item id
   const fetchIDsToRemove = (uid) => {
     let result = [];
     //Reset all child elements
@@ -46,27 +47,9 @@ function App() {
   };
 
   const fetchAndMergeFields = ({ flow, uid, parentID }) => {
-    let to_be_removed = [];
+    let remove_ids = [];
     // If selected field has no parent i.e. is a root.
-    if (!parentID) {
-      //Reset all child elements
-      const found_root = formFields.find((f) => f.id === uid);
-
-      // Fetch items where root id is in parentID i.e. Find all the childs
-      const child_elements = formFields.filter(
-        (f) => f.parentID === found_root.id
-      );
-
-      if (child_elements.length) {
-        for (let item of child_elements) {
-          const found = formFields.find((f) => f.parentID === item.id);
-          //If child is in render fields list, Remove
-          if (found) {
-            to_be_removed.push(found.id);
-          }
-        }
-      }
-    }
+    if (parentID === 'root') remove_ids = fetchIDsToRemove(uid);
 
     const fetchedFields = sampleJSON.filter(
       (f) => f.parentID === uid && f.controlFlow === flow
@@ -76,8 +59,8 @@ function App() {
     const sanitized_data = formFields.filter((f) => f.parentID !== uid);
     let merged_fields = [...sanitized_data, ...fetchedFields];
 
-    if (to_be_removed.length) {
-      for (let id of to_be_removed) {
+    if (remove_ids.length) {
+      for (let id of remove_ids) {
         merged_fields = merged_fields.filter((f) => f.id !== id);
       }
     }
@@ -106,8 +89,6 @@ function App() {
       setElements(newElements);
     });
   };
-
-  console.log('=========>', formFields);
 
   return (
     <FormContext.Provider value={{ handleChange }}>
