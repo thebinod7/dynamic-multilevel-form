@@ -1,56 +1,56 @@
 [
   {
     "id": 1,
-    "field_label": "K tapaile mall chharnu bhayo?",
+    "field_label": "Did you pass high school?",
     "field_type": "yes_no",
     "parentID": "root",
     "controlFlow": null
   },
   {
     "id": 2,
-    "field_label": "Mall kahile chharnu bho?",
+    "field_label": "How was your experience?",
     "field_type": "text",
     "parentID": 1,
     "controlFlow": "Yes"
   },
   {
     "id": 3,
-    "field_label": "Mall ramro cha?",
+    "field_label": "Does it worth?",
     "field_type": "yes_no",
     "parentID": 1,
     "controlFlow": "Yes"
   },
   {
     "id": 4,
-    "field_label": "Mall kinnu bhayo ta?",
+    "field_label": "Did you go to school?",
     "field_type": "yes_no",
     "parentID": 1,
     "controlFlow": "No"
   },
   {
     "id": 5,
-    "field_label": "Kun mall kinnu bho?",
+    "field_label": "Please specify school name?",
     "field_type": "text",
     "parentID": 4,
     "controlFlow": "Yes"
   },
   {
     "id": 6,
-    "field_label": "Kina kinnu bhayena?",
+    "field_label": "Why didn't you join the shcool?",
     "field_type": "text",
     "parentID": 4,
     "controlFlow": "No"
   },
   {
     "id": 7,
-    "field_label": "(1-5) Kati +ve rating dinu huncha?",
+    "field_label": "(1-5) rate high school experience?",
     "field_type": "text",
     "parentID": 3,
     "controlFlow": "Yes"
   },
   {
     "id": 8,
-    "field_label": "(1-5) Kati -ve rating dinu huncha?",
+    "field_label": "Why so?",
     "field_type": "text",
     "parentID": 3,
     "controlFlow": "No"
